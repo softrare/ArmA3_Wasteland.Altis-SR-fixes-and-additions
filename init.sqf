@@ -32,7 +32,29 @@ if (isNull player) then { X_JIP = true };
 };
 
 //init Wasteland Core
-[] execVM "config.sqf";
+if (X_Server) then {
+	custom_config = compileFinal preProcessFileLineNumbers "A3W_Config.sqf";
+	//publicVariable "custom_config";
+};
+
+if (X_Client) then {
+	_timeout = 5;
+	_requested = false;
+	while {isNil "custom_config"} do {
+		if (_timeout <= 0) then {
+			if (_requested) then {
+				EndMission "FAILED";	
+			} else {
+				_requested = true;
+				// Code here
+			};
+		};
+		_timeout = _timeout - 1;
+		sleep 1;
+	};
+};
+call custom_config;
+call compile preProcessFileLineNumbers "config.sqf";
 [] execVM "briefing.sqf";
 
 if (!isDedicated) then
