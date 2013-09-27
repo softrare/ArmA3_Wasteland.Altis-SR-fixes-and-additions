@@ -31,30 +31,36 @@ if (isNull player) then { X_JIP = true };
 	};
 };
 
-//init Wasteland Core
-if (X_Server) then {
-	custom_config = compileFinal preProcessFileLineNumbers "A3W_Config.sqf";
-	//publicVariable "custom_config";
-};
-
-if (X_Client) then {
-	_timeout = 5;
-	_requested = false;
-	while {isNil "custom_config"} do {
-		if (_timeout <= 0) then {
-			if (_requested) then {
-				EndMission "FAILED";	
-			} else {
-				_requested = true;
-				// Code here
-			};
-		};
-		_timeout = _timeout - 1;
-		sleep 1;
+//Initialize Configuration (default and external)
+if (isServer) then {
+	_config = ["config_client.sqf"];
+	{
+		_config set [count _config, preprocessfilelinenumbers format["A3Wasteland_settings\%1", _x]];
+	}
+	a3w_custom_config = compileFinal str _config;
+	publicVariable "a3w_custom_config";
+	"configFailed" addPublicVariableEventHandler {
+		diag_log format["WARNING: %1 failed to receive "];
+		owner (_this select 1) publicVariableClient "a3w_custom_config";
 	};
 };
-call custom_config;
+if (!isDedicated){
+	_delta = 0;
+	while {isNil "a3w_custom_config"} do {
+		sleep 0.1;
+		_delta = _delta+0.1;
+		if _delta > 5 {
+			//TODO: Add a check to ensure this isn't continuing forever!
+			diag_log "WARNING: Requesting external configuration again";
+			configFailed = [player];
+			publicVariableServer "configFailed";
+			_delta = 0;
+		}; 
+	};
+};
+{call _x;} forEach call a3w_custom_config;
 call compile preProcessFileLineNumbers "config.sqf";
+
 [] execVM "briefing.sqf";
 
 if (!isDedicated) then

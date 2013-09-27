@@ -5,8 +5,7 @@
 //	@file Description: Main config.
 
 // To calculate price for vests
-_getCapacity = 
-{
+_getCapacity = compileFinal '
 	private ["_item", "_capacity", "_containerClass"];
 	_item = _this select 0;
 	
@@ -21,7 +20,7 @@ _getCapacity =
 	};
 	
 	_capacity
-};
+';
 
 //Gunstore Weapon List - Gun Store Base List
 // Text name, classname, buy cost, sell amount
@@ -280,8 +279,7 @@ config_items_jerrycans_max = compileFinal "1";
 config_items_syphon_hose_max = compileFinal "1";
 
 config_refuel_amount_default = compileFinal "0.25";
-config_refuel_amounts = compileFinal str
-[
+config_refuel_amounts = compileFinal str [
 	["Quadbike_01_base_F", 0.75],
 	["Tank", 0.10],
 	["Air", 0.10],
