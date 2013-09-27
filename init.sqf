@@ -33,10 +33,11 @@ if (isNull player) then { X_JIP = true };
 
 //Initialize Configuration (default and external)
 if (isServer) then {
-	_config = ["config_client.sqf"];
+	_files = ["client_config.sqf"];
+	_config = [];
 	{
 		_config set [count _config, preprocessfilelinenumbers format["A3Wasteland_settings\%1", _x]];
-	}
+	} forEach _files;
 	a3w_custom_config = compileFinal str _config;
 	publicVariable "a3w_custom_config";
 	"configFailed" addPublicVariableEventHandler {
