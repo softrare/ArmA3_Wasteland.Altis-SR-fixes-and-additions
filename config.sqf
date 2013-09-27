@@ -5,7 +5,7 @@
 //	@file Description: Main config.
 
 // To calculate price for vests
-_getCapacity = compileFinal '
+_getCapacity = {
 	private ["_item", "_capacity", "_containerClass"];
 	_item = _this select 0;
 	
@@ -20,7 +20,7 @@ _getCapacity = compileFinal '
 	};
 	
 	_capacity
-';
+};
 
 //Gunstore Weapon List - Gun Store Base List
 // Text name, classname, buy cost, sell amount
