@@ -36,7 +36,7 @@ if (isServer) then {
 	_files = ["client_config.sqf"];
 	_config = [];
 	{
-		_config set [count _config, preprocessfilelinenumbers format["A3Wasteland_settings\%1", _x]];
+		_config set [count _config, compile preprocessfilelinenumbers format["A3Wasteland_settings\%1", _x]];
 	} forEach _files;
 	a3w_custom_config = compileFinal str _config;
 	publicVariable "a3w_custom_config";
@@ -45,12 +45,12 @@ if (isServer) then {
 		owner (_this select 1) publicVariableClient "a3w_custom_config";
 	};
 };
-if (!isDedicated){
+if (!isDedicated) then {
 	_delta = 0;
 	while {isNil "a3w_custom_config"} do {
 		sleep 0.1;
 		_delta = _delta+0.1;
-		if _delta > 5 {
+		if (_delta > 5) then {
 			//TODO: Add a check to ensure this isn't continuing forever!
 			diag_log "WARNING: Requesting external configuration again";
 			configFailed = [player];
