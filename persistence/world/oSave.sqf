@@ -12,7 +12,7 @@ _saveableObjects = +objectList;
 {
 	_genObject = _x select 1;
 	
-	if ({_genObject == _x} count _saveableObjects == 0)) then
+	if ({_genObject == _x} count _saveableObjects == 0) then
 	{
 		_saveableObjects set [count _saveableObjects, _genObject];
 	};
