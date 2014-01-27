@@ -59,6 +59,10 @@ waitUntil {!isNil "handgunLoaded"};
 [_UID, _UID, "HeadGear", "STRING"] call sendToServer;
 [_UID, _UID, "Goggles", "STRING"] call sendToServer;
 
+[_UID, _UID, "Money", "NUMBER"] call sendToServer;
+[_UID, _UID, "Hunger", "NUMBER"] call sendToServer;
+[_UID, _UID, "Thirst", "NUMBER"] call sendToServer;
+
 
 //===========================================================================
 

@@ -135,6 +135,10 @@ applyPlayerDBValues =
 			};
 		} foreach _varValue;
 	};
+	
+	if(_varName == 'Money') then {player setVariable ["cmoney", _varValue, true];};
+	if(_varName == 'Hunger') then {hungerLevel = _varValue;};
+	if(_varName == 'Thirst') then {thirstLevel = _varValue;};	
 };
 
 //===========================================================================

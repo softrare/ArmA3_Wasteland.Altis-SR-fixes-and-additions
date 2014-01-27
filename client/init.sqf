@@ -67,7 +67,7 @@ if ((call config_player_saving_enabled) == 1) then {
 
 	// Deal with money here
 	// If there are server donations, bump up the amount players spawn with
-	_baseMoney = (call config_initial_spawn_money);
+	_baseMoney = player getVariable ["cmoney", (call config_initial_spawn_money)];
 	if ((call config_player_donations_enabled) == 1) then {
 		_donationMoney = player getVariable ["donationMoney", 0];
 		diag_log format["Player starting with $%1 (%2 + %3)", _baseMoney + _donationMoney, _baseMoney, _donationMoney];

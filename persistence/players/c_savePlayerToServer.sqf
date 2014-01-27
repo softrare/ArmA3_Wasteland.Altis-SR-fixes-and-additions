@@ -40,6 +40,10 @@ if(playerSetupComplete) then
 	[_uid, _uid, "Items", items player] call fn_SaveToServer;
 	[_uid, _uid, "AssignedItems", assignedItems player] call fn_SaveToServer;
 	
+	[_uid, _uid, "Money", player getVariable ["cmoney", 0]] call fn_SaveToServer;
+	[_uid, _uid, "Hunger", round hungerlevel] call fn_SaveToServer;
+	[_uid, _uid, "Thirst", round thirstlevel] call fn_SaveToServer;	
+	
 	magsWithAmmoCounts = [];
 	{
 		_class = _x select 0;
