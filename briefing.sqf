@@ -10,6 +10,16 @@ player createDiarySubject ["credits", "Credits"];
 
 player createDiaryRecord ["changelog",
 [
+"0.9f-sr1",
+"
+<br/> [Added] - Also saving money, thirst and hunger level
+<br/> [Added] - Ability to play dead (you cannot save the player while being dead)
+<br/> [Changed] - Cannot save the player within 20 seconds of being shot or firing your gun.
+"
+]];
+
+player createDiaryRecord ["changelog",
+[
 "0.9f",
 "
 <br/> [Added] - Money missions

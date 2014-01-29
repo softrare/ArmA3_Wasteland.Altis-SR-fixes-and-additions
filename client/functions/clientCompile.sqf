@@ -1,14 +1,18 @@
 //	@file Name: clientCompile.sqf
-//	@file Author: [404] Deadbeat, [404] Costlyy, [GoT] JoSchaap, MercyfulFate, AgentRev
+//	@file Author: [404] Deadbeat, [404] Costlyy, [GoT] JoSchaap, MercyfulFate, AgentRev, SoftRare
 //	@file Args:
 
 mf_notify_client = "client\functions\notifyClient.sqf" call mf_compile;
 mf_util_playUntil = "client\functions\playUntil.sqf" call mf_compile;
 
+[] execVM "client\functions\timer.sqf";
+
 // Event handlers
 onRespawn = "client\clientEvents\onRespawn.sqf" call mf_compile;
 onKilled = "client\clientEvents\onKilled.sqf" call mf_compile;
 onKeyPress = "client\clientEvents\onKeyPress.sqf" call mf_compile;
+onFired = "client\clientEvents\onFired.sqf" call mf_compile;
+onHit = "client\clientEvents\onHit.sqf" call mf_compile;
 
 // Functions
 addWeaponInventory = "client\functions\addWeaponInventory.sqf" call mf_compile;

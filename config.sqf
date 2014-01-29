@@ -1,6 +1,6 @@
 //	@file Version: 1.0
 //	@file Name: config.sqf
-//	@file Author: [404] Deadbeat, [404] Costlyy, [GoT] JoSchaap, AgentRev
+//	@file Author: [404] Deadbeat, [404] Costlyy, [GoT] JoSchaap, AgentRev, SoftRare
 //	@file Created: 20/11/2012 05:13
 //	@file Description: Main config.
 
@@ -62,15 +62,17 @@ config_refuel_amounts = compileFinal str
 	["Tank", 0.10],
 	["Air", 0.10]
 ];
+// Determine here how many seconds within being hit or firing ones gun, the player shouldn't be able to save current state.
+Unable_to_save_within_seconds_hitFiring = compileFinal "20";
 
 // Is player saving enabled?
-config_player_saving_enabled = compileFinal "0";
+config_player_saving_enabled = compileFinal "1";
 
 // Can players get extra in-game cash at spawn by donating?
 config_player_donations_enabled = compileFinal "0";
 
-// How much do players spawn with?
-config_initial_spawn_money = compileFinal "100";
+// How much do players spawn with? SoftRare: Set to "0" to have an economy as consistent as possible
+config_initial_spawn_money = compileFinal "0";
 
 // Territory system definitions. See territory/README.md for more details.
 //

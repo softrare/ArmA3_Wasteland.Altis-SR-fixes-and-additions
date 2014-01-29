@@ -1,6 +1,6 @@
-//@file Version: 1.1
+//@file Version: 1.2
 //@file Name: init.sqf
-//@file Author: [404] Deadbeat, [GoT] JoSchaap, AgentRev, [KoS] Bewilderbeest
+//@file Author: [404] Deadbeat, [GoT] JoSchaap, AgentRev, [KoS] Bewilderbeest, SoftRare
 //@file Created: 20/11/2012 05:19
 //@file Description: The client init.
 
@@ -95,6 +95,8 @@ _playerWasMoved = player getVariable ["playerWasMoved", 0];
 if(!isNil "client_initEH") then {player removeEventHandler ["Respawn", client_initEH];};
 player addEventHandler ["Respawn", { _this spawn onRespawn }];
 player addEventHandler ["Killed", { _this spawn onKilled }];
+player addEventHandler ["Fired", { _this spawn onFired }];
+player addEventHandler ["Hit", { _this spawn onHit }];
 
 //Setup player menu scroll action.
 [] execVM "client\clientEvents\onMouseWheel.sqf";

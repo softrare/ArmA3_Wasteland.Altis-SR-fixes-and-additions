@@ -1,6 +1,15 @@
 private["_uid"];
 if(playerSetupComplete) then
 {	
+
+	if (playingDead > 0) exitWith {
+		hint "You cannot save while playing dead.";
+	};
+
+	if (firedOrHitTimer <= (call Unable_to_save_within_seconds_hitFiring)-1) exitWith {
+		hint format ["You cannot save within %1 seconds of being shot or having fired your gun. Please wait %2 seconds.",(call Unable_to_save_within_seconds_hitFiring),((call Unable_to_save_within_seconds_hitFiring)-1)-firedOrHitTimer];
+	};	
+
 	_uid = getPlayerUID player;
 	[_uid, _uid, "Health", damage player] call fn_SaveToServer;
 	[_uid, _uid, "Side", str(side player)] call fn_SaveToServer;
@@ -55,6 +64,8 @@ if(playerSetupComplete) then
 	[_uid, _uid, "MagazinesWithAmmoCount", magsWithAmmoCounts] call fn_SaveToServer;
 	//[_uid, _uid, "Weapons", Weapons player] call fn_SaveToServer;
 	player globalChat "Player saved!";
+	
+	hint "Successfully saved the player";
 };
 
 // Possible new methods
