@@ -5,6 +5,7 @@
 //@file Description: Pack the nearest Spawn Beacon
 //@file Argument: [player, player, _action, []] the standard "called by an action" values
 
+#include "mutex.sqf"
 #define ANIM "AinvPknlMstpSlayWrflDnon_medic"
 #define DURATION MF_ITEMS_SPAWN_BEACON_DURATION
 #define ERR_CANCELLED "Packing Spawn Beacon Cancelled"
@@ -36,7 +37,11 @@ _hasFailed = {
     [_failed, _text];
 };
 
-_success =  [DURATION, ANIM, _hasFailed, [_beacon]] call a3w_actions_start;
+MUTEX_LOCK_OR_FAIL;
+_beacon setVariable ['packing', true, true];
+_success =  [DURATION, ANIM, _hasFailed, [_beacon]] call mf_util_playUntil;
+_beacon setVariable ['packing', false, true];
+MUTEX_UNLOCK;
     
 if (_success) then {
     pvar_spawn_beacons = pvar_spawn_beacons - [_beacon];

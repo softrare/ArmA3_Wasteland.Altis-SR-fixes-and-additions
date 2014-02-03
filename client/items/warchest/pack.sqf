@@ -32,11 +32,13 @@ _hasFailed = {
 };
 
 private "_success";
-_success =  [DURATION, ANIM, _hasFailed, [_warchest]] call a3w_actions_start;
+MUTEX_LOCK_OR_FAIL;
+_success =  [DURATION, ANIM, _hasFailed, [_warchest]] call mf_util_playUntil;
 MUTEX_UNLOCK;
     
 if (_success) then {
     deleteVehicle _warchest;
+
 	[MF_ITEMS_WARCHEST, 1] call mf_inventory_add;
     ["You successfully packed the Warchest", 5] call mf_notify_client;
 };
